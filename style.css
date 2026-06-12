@@ -1,0 +1,96 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  overscroll-behavior: none;
+}
+
+.screen {
+  position: relative;
+}
+
+#title-screen {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+  background-color: blue;
+}
+
+#map {
+  height: 200vh;
+
+  #bologna {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+
+    --grid-color: #ddd;
+    --grid-repeat-every: 5vmin;
+    --grid-width: 0.1vmin;
+    background:
+      repeating-linear-gradient(
+        to right,
+        transparent,
+        transparent calc(var(--grid-repeat-every) - var(--grid-width)),
+        var(--grid-color) calc(var(--grid-repeat-every) - var(--grid-width)),
+        var(--grid-color) var(--grid-repeat-every)
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent calc(var(--grid-repeat-every) - var(--grid-width)),
+        var(--grid-color) calc(var(--grid-repeat-every) - var(--grid-width)),
+        var(--grid-color) var(--grid-repeat-every)
+      );
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    span {
+      position: absolute;
+      top: 25%;
+      left: 36%;
+      color: black;
+    }
+  }
+
+  #ribbon {
+    position: sticky;
+    top: calc(25% + 1em + 1em);
+    width: 100%;
+    height: 1em;
+
+    --grid-color: #faaa;
+    --grid-repeat-every: 0.2em;
+    --grid-width: 0.1em;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent calc(var(--grid-repeat-every) - var(--grid-width)),
+        var(--grid-color) calc(var(--grid-repeat-every) - var(--grid-width)),
+        var(--grid-color) var(--grid-repeat-every)
+      ),
+      repeating-linear-gradient(
+        135deg,
+        transparent,
+        transparent calc(var(--grid-repeat-every) - var(--grid-width)),
+        var(--grid-color) calc(var(--grid-repeat-every) - var(--grid-width)),
+        var(--grid-color) var(--grid-repeat-every)
+      ),
+      linear-gradient(to bottom, #faa, red 50%);
+  }
+}
+
+#smth {
+  height: 100vh;
+}
