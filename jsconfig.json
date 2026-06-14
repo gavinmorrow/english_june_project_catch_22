@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@tsconfig/recommended/tsconfig.json",
+
+  "compilerOptions": {
+    "checkJs": true,
+    "lib": ["ES2023", "DOM"],
+    "target": "es2023",
+    "module": "es2022",
+    "moduleResolution": "node16",
+    "strict": true,
+    // Allows for absolute imports instead of always relative
+    // See <https://stackoverflow.com/a/55918656/15920018> (2025-08-28)
+    "baseUrl": "./",
+    "paths": {
+      // Make absolute paths start with `/`, so browsers treat them as absolute
+      "/*": ["./*"],
+    },
+  },
+
+  "include": ["*.js", "**/*.js"],
+}
