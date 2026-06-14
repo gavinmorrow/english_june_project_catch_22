@@ -22,9 +22,18 @@ const map = {
       const opacity = ((-((scrollPercent - 2) ** 2) + 1) * 7) / 8;
       bologna.style.setProperty("--overlay-opacity", `${opacity}`);
       const bolognaPin = NonNull(document.getElementById("bologna-pin"));
-      if (1.5 <= scrollPercent && scrollPercent <= 2.5)
+      const pianosaPin = NonNull(document.getElementById("pianosa-pin"));
+      if (1.5 <= scrollPercent && scrollPercent <= 2.5) {
         bolognaPin.classList.add("big");
-      else bolognaPin.classList.remove("big");
+        pianosaPin.classList.add("big");
+      } else {
+        bolognaPin.classList.remove("big");
+        pianosaPin.classList.remove("big");
+      }
+      const arrow = NonNull(document.getElementById("arrow"));
+      if (1.9 <= scrollPercent && scrollPercent <= 2.5)
+        arrow.classList.add("show");
+      else arrow.classList.remove("show");
     }
   },
 };
