@@ -69,12 +69,7 @@ body {
       left: 30vh;
       color: black;
     }
-  }
 
-  #ribbon-wrapper {
-    position: sticky;
-    height: 100vh;
-    top: 0;
     #ribbon {
       position: absolute;
       top: 25vh;
@@ -102,6 +97,7 @@ body {
         linear-gradient(to bottom, #faa, red 50%);
       rotate: -25deg;
       /* TODO: pins on edge of ribbon */
+      z-index: 1000;
     }
   }
 }

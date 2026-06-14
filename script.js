@@ -13,7 +13,7 @@ const map = {
 
     const ribbon = NonNull(document.getElementById("ribbon"));
     ribbon.style.opacity = `${scrollPercent}`;
-    ribbon.style.marginTop = `${-(this.elem.clientHeight - offsetFromTopOfMap) + (Math.random() * 1 - 0.5) * ((this.elem.clientHeight - offsetFromTopOfMap) / (innerHeight / 10)) ** 4}px`;
+    ribbon.style.marginTop = `${(Math.random() * 1 - 0.5) * ((this.elem.clientHeight - offsetFromTopOfMap) / (innerHeight / 5)) ** 4}px`;
   },
 };
 
