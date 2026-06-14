@@ -85,6 +85,12 @@ body {
         text-shadow: 0.1em 0 black;
         z-index: 4;
 
+        &::before {
+          content: "Target: ";
+          position: absolute;
+          top: -1lh;
+          left: 1ex;
+        }
         &::after {
           content: " (held by Nazis)";
         }
@@ -255,6 +261,11 @@ body {
     position: absolute;
     top: 200vh;
     scroll-snap-align: start;
+  }
+  #end-scroll-align {
+    position: absolute;
+    top: 400vh;
+    scroll-snap-align: end;
   }
 }
 
