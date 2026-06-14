@@ -108,8 +108,9 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: black;
-    opacity: var(--overlay-opacity);
+    background-color: rgba(0, 0, 0, var(--overlay-opacity));
+    backdrop-filter: blur(calc(5px * var(--overlay-opacity)));
+    /* backdrop-filter: invert(50%); */
     z-index: 1;
     content: "";
   }
