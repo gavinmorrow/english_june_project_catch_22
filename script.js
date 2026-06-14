@@ -11,9 +11,19 @@ const map = {
     const offsetFromTopOfMap = scrollY - wrapper.offsetTop;
     const scrollPercent = offsetFromTopOfMap / this.elem.clientHeight;
 
-    const ribbon = NonNull(document.getElementById("ribbon"));
-    ribbon.style.opacity = `${scrollPercent}`;
-    ribbon.style.marginTop = `${(Math.random() * 1 - 0.5) * ((this.elem.clientHeight - offsetFromTopOfMap) / (innerHeight / 5)) ** 4}px`;
+    if (scrollPercent >= 0 && scrollPercent <= 1) {
+      const ribbon = NonNull(document.getElementById("ribbon"));
+      ribbon.style.opacity = `${scrollPercent}`;
+      // Math.max is for overscroll, where the value becomes negative
+      ribbon.style.marginTop = `${(Math.random() * 1 - 0.5) * (Math.max(0, this.elem.clientHeight - offsetFromTopOfMap) / (innerHeight / 5)) ** 4}px`;
+    }
+    if (scrollPercent >= 1 && scrollPercent <= 2) {
+      const bologna = NonNull(document.getElementById("bologna"));
+      bologna.style.setProperty(
+        "--overlay-opacity",
+        `${(scrollPercent / 2 + 0.5 - 1) ** 2}`,
+      );
+    }
   },
 };
 

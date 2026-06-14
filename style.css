@@ -29,7 +29,7 @@ body {
 }
 
 #map {
-  height: 200vh;
+  height: 300vh;
 
   #bologna {
     position: sticky;
@@ -55,6 +55,8 @@ body {
         var(--grid-color) calc(var(--grid-repeat-every) - var(--grid-width)),
         var(--grid-color) var(--grid-repeat-every)
       );
+
+    --overlay-opacity: 0;
 
     img {
       position: absolute;
@@ -97,8 +99,19 @@ body {
         linear-gradient(to bottom, #faa, red 50%);
       rotate: -25deg;
       /* TODO: pins on edge of ribbon */
-      z-index: 1000;
+      z-index: 2;
     }
+  }
+  #bologna::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    opacity: var(--overlay-opacity);
+    z-index: 1;
+    content: "";
   }
 }
 
