@@ -148,6 +148,10 @@ body {
       &.moved {
         background: #2f2;
         background-clip: text;
+        transition:
+          all 1s,
+          opacity 10s 2s;
+        opacity: 0;
       }
     }
 
