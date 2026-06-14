@@ -21,8 +21,21 @@ const map = {
       const bologna = NonNull(document.getElementById("bologna"));
       bologna.style.setProperty(
         "--overlay-opacity",
-        `${(scrollPercent / 2 + 0.5 - 1) ** 2}`,
+        `${(((scrollPercent - 1) * 7) / 8) ** 2}`,
       );
+      const bolognaPin = NonNull(document.getElementById("bologna-pin"));
+      if (scrollPercent >= 1.5) bolognaPin.classList.add("big");
+      else bolognaPin.classList.remove("big");
+    }
+    if (scrollPercent >= 2 && scrollPercent <= 3) {
+      const bologna = NonNull(document.getElementById("bologna"));
+      bologna.style.setProperty(
+        "--overlay-opacity",
+        `${(((3 - scrollPercent) * 7) / 8) ** 2}`,
+      );
+      const bolognaPin = NonNull(document.getElementById("bologna-pin"));
+      if (scrollPercent <= 2.5) bolognaPin.classList.add("big");
+      else bolognaPin.classList.remove("big");
     }
   },
 };

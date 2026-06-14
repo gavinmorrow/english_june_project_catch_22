@@ -3,6 +3,8 @@ body {
   padding: 0;
   margin: 0;
   overscroll-behavior: none;
+
+  font-family: sans-serif;
 }
 
 .screen {
@@ -23,13 +25,12 @@ body {
   h1 {
     text-shadow: 0.1em 0 black;
     text-transform: uppercase;
-    font-family: sans-serif;
     font-size: 10vw;
   }
 }
 
 #map {
-  height: 300vh;
+  height: 400vh;
 
   #bologna {
     position: sticky;
@@ -70,6 +71,16 @@ body {
       top: 25vh;
       left: 30vh;
       color: black;
+      z-index: 2;
+      transition: all 1s;
+
+      &.big {
+        color: #f22;
+        font-weight: bold;
+        font-size: xxx-large;
+        text-shadow: 0.1em 0 black;
+        z-index: 4;
+      }
     }
 
     #ribbon {
