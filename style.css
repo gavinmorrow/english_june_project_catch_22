@@ -19,6 +19,13 @@ body {
 
   color: white;
   background-color: blue;
+
+  h1 {
+    text-shadow: 0.1em 0 black;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-size: 10vw;
+  }
 }
 
 #map {
