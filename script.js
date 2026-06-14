@@ -64,3 +64,9 @@ document.addEventListener("scroll", (event) => {
     if (page.isVisible) page.handle();
   }
 });
+// Reset to last scroll position
+setTimeout(() => {
+  const top = scrollY;
+  window.scroll({ top: 0 });
+  window.scroll({ top });
+}, 20);
