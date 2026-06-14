@@ -93,7 +93,10 @@ body {
 
       &.big {
         color: #f22;
-        &::before {
+        &.moved {
+          color: #2f2;
+        }
+        &:not(.moved)::before {
           content: "Target: ";
           position: absolute;
           top: -1lh;
@@ -101,6 +104,17 @@ body {
         }
         &::after {
           content: " (held by Nazis)";
+          color: #f22;
+          transition:
+            filter 5s,
+            left 5s;
+          position: relative;
+          left: 0;
+          z-index: -1;
+        }
+        &.moved::after {
+          filter: blur(0.1em);
+          left: -50%;
         }
       }
     }
@@ -131,13 +145,27 @@ body {
         left: 20vh;
         opacity: 1;
       }
+      &.moved {
+        background: #2f2;
+        background-clip: text;
+      }
     }
 
     #ribbon {
       position: absolute;
       top: 24vh;
-      width: calc(100vh * cos(25deg));
+      --rotate: -25deg;
+      rotate: var(--rotate);
+      width: calc(100vh * cos(var(--rotate)));
       height: 2em;
+      opacity: 0;
+
+      &.moved {
+        transition: all 2s;
+        --rotate: -10deg;
+        top: 18vh;
+        z-index: 5;
+      }
 
       --grid-color: #faaa;
       --grid-repeat-every: 0.2em;
@@ -158,7 +186,6 @@ body {
           var(--grid-color) var(--grid-repeat-every)
         ),
         linear-gradient(to bottom, #faa, red 50%);
-      rotate: -25deg;
       /* TODO: pins on edge of ribbon */
       z-index: 2;
 
@@ -307,4 +334,15 @@ body {
 
 #smth {
   height: 100vh;
+}
+
+#bo {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #000;
+  cursor: none;
 }

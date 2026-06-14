@@ -1,19 +1,22 @@
 import { assertIsClass } from "./assertIsClass.js";
 import { assertHTMLElem, assertHTMLElems } from "./assertHtmlElem.js";
 import NonNull from "./NonNull.js";
+import toggleClass from "./toggleClass.js";
 
 const map = {
   elem: NonNull(document.getElementById("map-img")),
   isVisible: false,
+  bo: false,
+  wasMoved: false,
   handle() {
     const wrapper = NonNull(document.getElementById("map"));
 
     const offsetFromTopOfMap = scrollY - wrapper.offsetTop;
     const scrollPercent = offsetFromTopOfMap / this.elem.clientHeight;
 
+    const ribbon = NonNull(document.getElementById("ribbon"));
+    ribbon.style.opacity = `${Math.max(0, Math.min(scrollPercent, 1))}`;
     if (0 <= scrollPercent && scrollPercent <= 1) {
-      const ribbon = NonNull(document.getElementById("ribbon"));
-      ribbon.style.opacity = `${scrollPercent}`;
       // Math.max is for overscroll, where the value becomes negative
       ribbon.style.marginTop = `${(Math.random() * 1 - 0.5) * (Math.max(0, this.elem.clientHeight - offsetFromTopOfMap) / (innerHeight / 5)) ** 4}px`;
     }
@@ -31,9 +34,35 @@ const map = {
         pianosaPin.classList.remove("big");
       }
       const arrow = NonNull(document.getElementById("arrow"));
-      if (1.9 <= scrollPercent && scrollPercent <= 2.5)
+      if (scrollPercent < 1.9) {
+        this.bo = false;
+        if (this.wasMoved) {
+          this.wasMoved = false;
+          bo();
+          bo();
+        }
+      } else if (2.5 < scrollPercent) {
+        this.bo = false;
+        if (!this.wasMoved) {
+          this.wasMoved = true;
+          bo();
+          bo();
+        }
+      }
+      if (1.9 <= scrollPercent && scrollPercent <= 2.5) {
         arrow.classList.add("show");
-      else arrow.classList.remove("show");
+        if (!this.bo) {
+          if (!this.wasMoved) {
+            setTimeout(bo, 3000);
+            setTimeout(bo, 7000);
+          } else {
+            bo();
+            bo();
+          }
+          this.wasMoved = !this.wasMoved;
+          this.bo = true;
+        }
+      } else arrow.classList.remove("show");
     }
   },
 };
@@ -70,3 +99,16 @@ setTimeout(() => {
   window.scroll({ top: 0 });
   window.scroll({ top });
 }, 20);
+
+const bo = () => {
+  const bolognaPin = NonNull(document.getElementById("bologna-pin"));
+  const arrow = NonNull(document.getElementById("arrow"));
+  const bo = NonNull(document.getElementById("bo"));
+  const ribbon = NonNull(document.getElementById("ribbon"));
+  if (bo.style.display == "block") {
+    bo.style.display = "";
+    toggleClass(ribbon, "moved");
+    toggleClass(bolognaPin, "moved");
+    toggleClass(arrow, "moved");
+  } else bo.style.display = "block";
+};
