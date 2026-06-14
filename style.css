@@ -250,6 +250,12 @@ body {
       content: "";
     }
   }
+
+  #nazis-scroll-align {
+    position: absolute;
+    top: 200vh;
+    scroll-snap-align: start;
+  }
 }
 
 #smth {
