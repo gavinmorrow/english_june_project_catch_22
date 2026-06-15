@@ -34,7 +34,11 @@ const newspaper = (scrollPercent, start, end, headline, audio = null) => {
 
   if (percentThrough >= 1 && !playedAudio.get(headline) && audio !== null) {
     const a = new Audio(audio);
-    a.play();
+    a.play().catch((err) => {
+      console.error(err);
+      alert("yaaaaay");
+      throw err;
+    });
     playedAudio.set(headline, true);
   }
 };

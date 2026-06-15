@@ -428,11 +428,12 @@ body {
   right: 0;
   background-color: #000;
   cursor: none;
+  z-index: 1000;
 }
 
 #news {
   position: fixed;
-  z-index: 100;
+  z-index: 99;
   left: 25vw;
   bottom: -15vh;
   width: 50vw;
