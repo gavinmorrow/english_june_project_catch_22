@@ -177,6 +177,22 @@ body {
           all 1s,
           opacity 10s 2s;
         opacity: 0;
+        &::after {
+          opacity: 0;
+        }
+      }
+      &::after {
+        content: "💀";
+        color: black;
+        background: transparent;
+        text-shadow: initial;
+
+        position: absolute;
+        top: 6.5vh;
+        left: 4vh;
+        rotate: 73deg;
+        font-size: 5vh;
+        transition: all 1s;
       }
     }
 
