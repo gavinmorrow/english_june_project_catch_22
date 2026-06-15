@@ -2,12 +2,17 @@ import { assertIsClass } from "./assertIsClass.js";
 import { assertHTMLElem, assertHTMLElems } from "./assertHtmlElem.js";
 import NonNull from "./NonNull.js";
 import toggleClass from "./toggleClass.js";
+import newspaper from "./newspaper.js";
 
 const map = {
   elem: NonNull(document.getElementById("map-img")),
   isVisible: false,
   bo: false,
   wasMoved: false,
+  /** @type {number|NodeJS.Timeout|null} */
+  timeout1: null,
+  /** @type {number|NodeJS.Timeout|null} */
+  timeout2: null,
   handle() {
     const wrapper = NonNull(document.getElementById("map"));
 
@@ -20,13 +25,16 @@ const map = {
       // Math.max is for overscroll, where the value becomes negative
       ribbon.style.marginTop = `${(Math.random() * 1 - 0.5) * (Math.max(0, this.elem.clientHeight - offsetFromTopOfMap) / (innerHeight / 5)) ** 4}px`;
     }
-    if (1 <= scrollPercent && scrollPercent <= 3) {
+    if (1 <= scrollPercent && scrollPercent <= 5) {
       const bologna = NonNull(document.getElementById("bologna"));
-      const opacity = ((-((scrollPercent - 2) ** 2) + 1) * 7) / 8;
+      let x = scrollPercent;
+      if (2 < scrollPercent && scrollPercent < 4) x = 2;
+      else if (scrollPercent >= 4) x = scrollPercent - 2;
+      const opacity = ((-((x - 2) ** 2) + 1) * 7) / 8;
       bologna.style.setProperty("--overlay-opacity", `${opacity}`);
       const bolognaPin = NonNull(document.getElementById("bologna-pin"));
       const pianosaPin = NonNull(document.getElementById("pianosa-pin"));
-      if (1.5 <= scrollPercent && scrollPercent <= 2.5) {
+      if (1.5 <= scrollPercent && scrollPercent <= 4.5) {
         bolognaPin.classList.add("big");
         pianosaPin.classList.add("big");
       } else {
@@ -37,24 +45,27 @@ const map = {
       if (scrollPercent < 1.9) {
         this.bo = false;
         if (this.wasMoved) {
+          if (this.timeout1 !== null) clearTimeout(this.timeout1);
+          if (this.timeout2 !== null) clearTimeout(this.timeout2);
           this.wasMoved = false;
           bo();
           bo();
         }
-      } else if (2.5 < scrollPercent) {
+      } else if (4.5 < scrollPercent) {
         this.bo = false;
         if (!this.wasMoved) {
+          if (this.timeout1 !== null) clearTimeout(this.timeout1);
+          if (this.timeout2 !== null) clearTimeout(this.timeout2);
           this.wasMoved = true;
           bo();
           bo();
         }
       }
       if (1.9 <= scrollPercent && scrollPercent <= 2.5) {
-        arrow.classList.add("show");
         if (!this.bo) {
           if (!this.wasMoved) {
-            setTimeout(bo, 3000);
-            setTimeout(bo, 7000);
+            this.timeout1 = setTimeout(bo, 3000);
+            this.timeout2 = setTimeout(bo, 7000);
           } else {
             bo();
             bo();
@@ -62,8 +73,14 @@ const map = {
           this.wasMoved = !this.wasMoved;
           this.bo = true;
         }
-      } else arrow.classList.remove("show");
+      }
+      if (1.9 <= scrollPercent && scrollPercent <= 4.5)
+        arrow.classList.add("show");
+      else arrow.classList.remove("show");
     }
+
+    newspaper(scrollPercent, 2, 2.9, "Bologna Captured", "yay.m4a");
+    newspaper(scrollPercent, 3.1, 4, "Major — de Coverley missing");
   },
 };
 
