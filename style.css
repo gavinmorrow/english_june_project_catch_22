@@ -34,11 +34,8 @@ body {
   }
 
   button {
-    background-color: red;
+    background-color: transparent;
     border: none;
-    border-radius: 0.5em;
-    font-size: xx-large;
-    color: white;
   }
 }
 
@@ -116,14 +113,32 @@ body {
           color: #f22;
           transition:
             filter 5s,
-            left 5s;
+            left 5s,
+            top 5s,
+            font-size 5s,
+            background-color 5s,
+            backdrop-filter 5s,
+            font-size 5s,
+            position 5s,
+            display 5s;
           position: relative;
+          top: 0;
           left: 0;
           z-index: -1;
         }
         &.moved::after {
           filter: blur(0.1em);
           left: -50%;
+        }
+        &.missing {
+          z-index: 100;
+        }
+        &.missing::after {
+          filter: none;
+          z-index: 100;
+          top: 1lh;
+          background-color: rgba(0, 0, 255, 0.5);
+          backdrop-filter: blur(0.5rem);
         }
       }
     }
@@ -333,9 +348,34 @@ body {
     }
   }
 
+  #ribbon-scroll-align {
+    position: absolute;
+    top: 100vh;
+    scroll-snap-align: start;
+  }
   #nazis-scroll-align {
     position: absolute;
     top: 200vh;
+    scroll-snap-align: start;
+  }
+  #news1-scroll-align {
+    position: absolute;
+    top: 250vh;
+    scroll-snap-align: start;
+  }
+  #newsmid-scroll-align {
+    position: absolute;
+    top: 300vh;
+    scroll-snap-align: start;
+  }
+  #news2-scroll-align {
+    position: absolute;
+    top: 355vh;
+    scroll-snap-align: start;
+  }
+  #newsend-scroll-align {
+    position: absolute;
+    top: 400vh;
     scroll-snap-align: start;
   }
   #end-scroll-align {

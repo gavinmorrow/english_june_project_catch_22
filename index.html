@@ -10,7 +10,9 @@
     <main>
       <section class="screen" id="title-screen">
         <h1>Catch-22</h1>
-        <button>Start</button>
+        <button onclick="document.documentElement.requestFullscreen()">
+          <img src="catch22.png" alt="" />
+        </button>
       </section>
       <section class="screen" id="map">
         <div id="bologna">
@@ -20,8 +22,13 @@
           <div id="arrow">→</div>
           <div id="ribbon"></div>
         </div>
-        <!-- <div id="nazis-scroll-align"></div> -->
-        <!-- <div id="end-scroll-align"></div> -->
+        <div id="ribbon-scroll-align"></div>
+        <div id="nazis-scroll-align"></div>
+        <div id="end-scroll-align"></div>
+        <div id="news1-scroll-align"></div>
+        <div id="newsmid-scroll-align"></div>
+        <div id="news2-scroll-align"></div>
+        <div id="newsend-scroll-align"></div>
       </section>
       <section id="smth" class="screen"></section>
     </main>

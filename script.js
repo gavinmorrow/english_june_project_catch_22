@@ -4,6 +4,7 @@ import NonNull from "./NonNull.js";
 import toggleClass from "./toggleClass.js";
 import newspaper from "./newspaper.js";
 
+let global_scrollPercent = 0;
 const map = {
   elem: NonNull(document.getElementById("map-img")),
   isVisible: false,
@@ -18,6 +19,7 @@ const map = {
 
     const offsetFromTopOfMap = scrollY - wrapper.offsetTop;
     const scrollPercent = offsetFromTopOfMap / this.elem.clientHeight;
+    global_scrollPercent = scrollPercent;
 
     const ribbon = NonNull(document.getElementById("ribbon"));
     ribbon.style.opacity = `${Math.max(0, Math.min(scrollPercent, 1))}`;
@@ -51,7 +53,7 @@ const map = {
           bo();
           bo();
         }
-      } else if (4.5 < scrollPercent) {
+      } else if (2.5 < scrollPercent) {
         this.bo = false;
         if (!this.wasMoved) {
           if (this.timeout1 !== null) clearTimeout(this.timeout1);
@@ -68,7 +70,7 @@ const map = {
             this.timeout2 = setTimeout(bo, 7000);
           } else {
             bo();
-            bo();
+            setTimeout(bo, 15);
           }
           this.wasMoved = !this.wasMoved;
           this.bo = true;
@@ -79,8 +81,15 @@ const map = {
       else arrow.classList.remove("show");
     }
 
-    newspaper(scrollPercent, 2, 2.9, "Bologna Captured", "yay.m4a");
+    newspaper(scrollPercent, 2.1, 2.9, "Bologna Captured", "yay.m4a");
     newspaper(scrollPercent, 3.1, 4, "Major — de Coverley missing");
+    if (scrollPercent > 4)
+      NonNull(document.getElementById("news")).style.bottom = "";
+
+    const bolognaPin = NonNull(document.getElementById("bologna-pin"));
+    if (3.3 <= scrollPercent && scrollPercent <= 3.8)
+      bolognaPin.classList.add("missing");
+    else bolognaPin.classList.remove("missing");
   },
 };
 
@@ -129,3 +138,12 @@ const bo = () => {
     toggleClass(arrow, "moved");
   } else bo.style.display = "block";
 };
+
+const breakpoints = [0, 1, 2, 2.5, 3, 3.55, 4];
+addEventListener("keydown", (event) => {
+  if (event.key != " ") return;
+  let nextBreakpoint = breakpoints.find(
+    (breakpoint) => breakpoint > global_scrollPercent,
+  );
+  window.scroll({ top: (nextBreakpoint ?? 0) * innerHeight });
+});
