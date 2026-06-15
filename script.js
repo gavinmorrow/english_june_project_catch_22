@@ -145,5 +145,6 @@ addEventListener("keydown", (event) => {
   let nextBreakpoint = breakpoints.find(
     (breakpoint) => breakpoint > global_scrollPercent,
   );
-  window.scroll({ top: (nextBreakpoint ?? 0) * innerHeight });
+  if (nextBreakpoint != null)
+    window.scroll({ top: nextBreakpoint * innerHeight });
 });
